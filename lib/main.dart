@@ -3,6 +3,8 @@ import 'package:jojo/pages/favorites.dart';
 import 'package:jojo/pages/home.dart';
 import 'package:jojo/components/AppDrawer.dart';
 
+// wichtig: flutter run -d web-server
+
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
@@ -35,7 +37,7 @@ class _NavigationSiteState extends State<NavigationSite> {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return Scaffold(
-      drawer: AppDrawer(),
+      drawer: const AppDrawer(),
       appBar: AppBar(
         title: const Text('JoJo Soundboard'),
         backgroundColor: Colors.black38,
@@ -61,7 +63,7 @@ class _NavigationSiteState extends State<NavigationSite> {
         ],
       ),
       body: <Widget>[
-        Home(),
+        const Home(),
         Favorites(),
       ][currentPageIndex],
     );

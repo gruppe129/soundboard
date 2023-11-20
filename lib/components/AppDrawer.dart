@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../pages/About.dart';
-import '../pages/Settings.dart';
+import '../pages/about.dart';
+import '../pages/settings.dart';
 
 class AppDrawer extends StatelessWidget {
+  const AppDrawer({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
