@@ -7,18 +7,27 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("About"),
-      ),
-      body: Center(
-        child: IconButton(
-          icon: const Icon(Icons.code),
-          onPressed: () {
-            
-          },
-        )
-      ),
-    );
+          appBar: AppBar(
+            title: const Text("About"),
+          ),
+          body: const Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('dies ist ein text bitt geben sie mir einen stern auf github dies wäre sehr erwünscht diese applikation ist ein meisterwerk'),
+                IconButton(onPressed: null, icon: Icon(Icons.code)), // github öffnen
+                Text('v0.0.1')
+              ], // Children
+            ),
+          ),
+        );
+
   }
 }
+
+
+/*
+
+*/
