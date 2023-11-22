@@ -1,7 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:jojo/pages/favorites.dart';
 import 'package:jojo/pages/home.dart';
-import 'package:jojo/components/AppDrawer.dart';
+import 'package:jojo/pages/more.dart';
 
 // wichtig: flutter run -d web-server
 
@@ -15,7 +18,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'JoJo Soundboard',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: const ColorScheme.dark(
+          primary: Color.fromARGB(255, 47, 69, 200),
+          secondary: Color.fromARGB(255, 158, 175, 203),
+        ),
         useMaterial3: true,
       ),
       home: const NavigationSite(),
@@ -35,12 +41,23 @@ class _NavigationSiteState extends State<NavigationSite> {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData theme = Theme.of(context);
+    // final ThemeData theme = Theme.of(context);
     return Scaffold(
-      drawer: const AppDrawer(),
       appBar: AppBar(
-        title: const Text('JoJo Soundboard'),
-        backgroundColor: Colors.black38,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(left: 5, right: 10),
+              child: const Text('JoJo Soundboard'),
+            ),
+            Image.asset(
+              'images/logo.png',
+              fit: BoxFit.contain,
+              height: 32,
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -51,21 +68,26 @@ class _NavigationSiteState extends State<NavigationSite> {
         selectedIndex: currentPageIndex,
         destinations: const <Widget>[
           NavigationDestination(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
             label: 'Home',
             tooltip: '',
+            selectedIcon: Icon(Icons.home),
           ),
           NavigationDestination(
-            icon: Icon(Icons.favorite),
+            icon: Icon(Icons.favorite_outline),
             label: 'Favorites',
             tooltip: '',
+            selectedIcon: Icon(Icons.favorite),
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.more_horiz_outlined),
+            label: 'More',
+            tooltip: '',
+            selectedIcon: Icon(Icons.more_horiz),
           ),
         ],
       ),
-      body: <Widget>[
-        const Home(),
-        Favorites(),
-      ][currentPageIndex],
+      body: <Widget>[const Home(), Favorites(), const More()][currentPageIndex],
     );
   }
 }

@@ -1,6 +1,11 @@
+// Flutter imports:
 import "package:flutter/material.dart";
-import "package:jojo/components/SoundButton.dart";
+
+// Package imports:
 import 'package:audioplayers/audioplayers.dart';
+
+// Project imports:
+import "package:jojo/components/SoundButton.dart";
 
 class Favorites extends StatelessWidget {
   Favorites({Key? key}) : super(key: key);
