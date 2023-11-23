@@ -35,6 +35,16 @@ class _SettingsState extends State<More> {
               leading: const Icon(Icons.palette),
               onTap: () {},
             ),
+            SwitchListTile(
+              value: _theme,
+              title: const Text('Switch Theme'),
+              onChanged: (bool value) {
+                setState(() {
+                  _theme = value;
+                });
+              },
+              secondary: Icon(_theme ? Icons.light_mode : Icons.dark_mode),
+            ),
             ListTile(
               title: const Text('About'),
               leading: const Icon(Icons.error),

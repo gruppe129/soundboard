@@ -62,8 +62,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/logo.png
-    - assets/sounds/softandwet.mp3  # To add assets to your application, add an assets section, like this:
+    - assets/sounds/softandwet.mp3  
+    - assets/images/
+  # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

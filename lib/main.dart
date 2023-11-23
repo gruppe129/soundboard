@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 // Project imports:
 import 'package:jojo/pages/favorites.dart';
@@ -10,6 +11,10 @@ import 'package:jojo/pages/more.dart';
 
 void main() => runApp(const MyApp());
 
+int randomNumber = Random().nextInt(29) + 1;
+String number =
+    (randomNumber > 9 ? randomNumber : "0$randomNumber").toString();
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,10 +23,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'JoJo Soundboard',
       theme: ThemeData(
-        colorScheme: const ColorScheme.dark(
-          primary: Color.fromARGB(255, 47, 69, 200),
-          secondary: Color.fromARGB(255, 158, 175, 203),
-        ),
+        colorSchemeSeed: Colors.blue,
+        brightness: Brightness.dark,      // !!!switch
         useMaterial3: true,
       ),
       home: const NavigationSite(),
@@ -52,7 +55,7 @@ class _NavigationSiteState extends State<NavigationSite> {
               child: const Text('JoJo Soundboard'),
             ),
             Image.asset(
-              'images/logo.png',
+              'images/jojo/$number.png',
               fit: BoxFit.contain,
               height: 32,
             ),
@@ -91,3 +94,4 @@ class _NavigationSiteState extends State<NavigationSite> {
     );
   }
 }
+

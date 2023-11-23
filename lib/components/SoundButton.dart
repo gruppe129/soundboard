@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:audioplayers/audioplayers.dart';
 
-//import 'package:share_plus/share_plus.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SoundButton extends StatelessWidget {
   final String text;
@@ -24,7 +24,9 @@ class SoundButton extends StatelessWidget {
     }
   }
 
-  void onLongPress() {}
+  void onLongPress() {
+    Share.shareFiles(["assets/$path"]);
+  }
 
   const SoundButton(
       {required this.text,
