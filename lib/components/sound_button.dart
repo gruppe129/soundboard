@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 
 import 'package:share_plus/share_plus.dart';
 
@@ -24,9 +25,19 @@ class SoundButton extends StatelessWidget {
     }
   }
 
-  void onLongPress() {
-    Share.shareFiles(["assets/$path"]);
-  }
+  void onLongPress() async {
+    print(path);
+    final audio = await rootBundle.load("assets/$path");
+    final buffer = audio.buffer;
+    Share.shareXFiles([
+      XFile.fromData(
+          buffer.asUint8List(
+          audio.offsetInBytes, 
+          audio.lengthInBytes),
+          name: path,
+          mimeType: "audio/mpeg")
+    ]);
+    }
 
   const SoundButton(
       {required this.text,

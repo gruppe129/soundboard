@@ -12,8 +12,7 @@ import 'package:jojo/pages/more.dart';
 void main() => runApp(const MyApp());
 
 int randomNumber = Random().nextInt(29) + 1;
-String number =
-    (randomNumber > 9 ? randomNumber : "0$randomNumber").toString();
+String number = (randomNumber > 9 ? randomNumber : "0$randomNumber").toString();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'JoJo Soundboard',
       theme: ThemeData(
         colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark,      // !!!switch
+        brightness: Brightness.dark, // !!!switch
         useMaterial3: true,
       ),
       home: const NavigationSite(),
@@ -94,4 +93,3 @@ class _NavigationSiteState extends State<NavigationSite> {
     );
   }
 }
-

@@ -1,5 +1,6 @@
 // Flutter imports:
 import "package:flutter/material.dart";
+import "package:url_launcher/url_launcher.dart";
 // about:
 
 class About extends StatelessWidget {
@@ -11,18 +12,38 @@ class About extends StatelessWidget {
       appBar: AppBar(
         title: const Text("About"),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: Center(
+        child: ListView(
           children: [
-            Text(
-                'dies ist ein text bitt geben sie mir einen stern auf github dies wäre sehr erwünscht diese applikation ist ein meisterwerk'),
-            IconButton(
-                onPressed: null, icon: Icon(Icons.code)), // github öffnen
-            Text("1.0.0")
-          ], // Children
+            const DrawerHeader(
+              margin: EdgeInsets.only(top: 50),
+              child: Image(image: AssetImage('images/logo.png')),
+            ),
+            ListTile(
+              title: const Text("Version"),
+              subtitle: const Text("1.0.0"),
+              onTap: () {},
+              leading: const Icon(Icons.adb),
+            ),
+            ListTile(
+              onTap: () {
+                launchUrl(
+                  Uri.parse("https://github.com/kommindiegruppe/soundboard"),
+                );
+              },
+              leading: const Icon(Icons.code),
+              title: const Text("Source Code"),
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+/* 
+            // github öffnen
+            const Text("Version: 1.0.0")
+          ], // Children
+        ),
+*/

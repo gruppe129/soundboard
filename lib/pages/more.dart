@@ -30,11 +30,6 @@ class _SettingsState extends State<More> {
               leading: const Icon(Icons.tune),
               onTap: () {},
             ),
-            ListTile(
-              title: const Text('Appearance'),
-              leading: const Icon(Icons.palette),
-              onTap: () {},
-            ),
             SwitchListTile(
               value: _theme,
               title: const Text('Switch Theme'),
