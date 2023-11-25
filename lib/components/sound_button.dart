@@ -11,7 +11,7 @@ class SoundButton extends StatelessWidget {
   final String text;
   final String path;
 
-  final player;
+  final player = AudioPlayer();
 
   void playFile(String file) async {
     await player.play(AssetSource(path));
@@ -25,8 +25,9 @@ class SoundButton extends StatelessWidget {
     }
   }
 
-  void onLongPress() async {
-    print(path);
+  void onLongPress() {
+    print(
+        path); /*
     final audio = await rootBundle.load("assets/$path");
     final buffer = audio.buffer;
     Share.shareXFiles([
@@ -36,18 +37,19 @@ class SoundButton extends StatelessWidget {
           audio.lengthInBytes),
           name: path,
           mimeType: "audio/mpeg")
-    ]);
-    }
+    ]);*/
+    Share.shareXFiles([
+      XFile(
+        "assets/logo.png",
+      )
+    ], text: "COOOL!!!");
+  }
 
-  const SoundButton(
-      {required this.text,
-      required this.path,
-      required this.player,
-      super.key});
+  SoundButton({required this.text, required this.path, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return FilledButton(
       onPressed: onClick,
       onLongPress: onLongPress,
       child: Text(

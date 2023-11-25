@@ -10,11 +10,32 @@ import "package:jojo/components/sound_button.dart";
 class Favorites extends StatelessWidget {
   Favorites({Key? key}) : super(key: key);
 
-  final player = AudioPlayer();
-
+  List<String> sounds = [
+    'soft and wet',
+    'hey baby',
+    'arigato Gyro',
+    'Dojyaaan',
+    'Mr Joestar',
+    'oi Josuke',
+    'OraOra'
+  ];
   @override
   Widget build(BuildContext context) {
-    return SoundButton(
-        text: "Soft&Wet", path: "sounds/softandwet.mp3", player: player);
+    return Column(
+      children: <Widget>[
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            ...sounds.map(
+              (sound) => SoundButton(
+                text: sound.toUpperCase(),
+                path: "sounds/$sound.mp3",
+              ),
+            )
+          ],
+        )
+      ],
+    );
   }
 }
