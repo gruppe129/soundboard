@@ -38,11 +38,8 @@ class SoundButton extends StatelessWidget {
           name: path,
           mimeType: "audio/mpeg")
     ]);*/
-    Share.shareXFiles([
-      XFile(
-        "assets/logo.png",
-      )
-    ], text: "COOOL!!!");
+    XFile audioFile = XFile("assets/$path");
+    Share.shareXFiles([audioFile]);
   }
 
   SoundButton({required this.text, required this.path, super.key});

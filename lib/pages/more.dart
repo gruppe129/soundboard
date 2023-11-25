@@ -1,8 +1,11 @@
 // Flutter imports:
 import "package:flutter/material.dart";
+import 'package:jojo/components/theme.dart';
+import 'package:jojo/components/theme_provider.dart';
 
 // Project imports:
 import 'package:jojo/pages/about.dart';
+import 'package:provider/provider.dart';
 
 class More extends StatefulWidget {
   const More({Key? key}) : super(key: key);
@@ -12,10 +15,12 @@ class More extends StatefulWidget {
 }
 
 class _SettingsState extends State<More> {
-  bool _theme = false;
-
   @override
   Widget build(BuildContext context) {
+    bool theme = Provider.of<ThemeProvider>(context).themeData == darkMode
+        ? true
+        : false;
+
     return Scaffold(
       body: Center(
         child: ListView(
@@ -31,15 +36,16 @@ class _SettingsState extends State<More> {
               onTap: () {},
             ),
             SwitchListTile(
-              value: _theme,
-              title: const Text('Switch Theme'),
-              onChanged: (bool value) {
-                setState(() {
-                  _theme = value;
-                });
-              },
-              secondary: Icon(_theme ? Icons.light_mode : Icons.dark_mode),
-            ),
+                value: theme,
+                title: const Text('Switch Theme'),
+                secondary: Icon(theme ? Icons.light_mode : Icons.dark_mode),
+                onChanged: (bool value) {
+                  setState(() {
+                    theme = value;
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .toggleTheme();
+                  });
+                }),
             ListTile(
               title: const Text('About'),
               leading: const Icon(Icons.error),

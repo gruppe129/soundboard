@@ -1,7 +1,11 @@
 // Flutter imports:
-import 'package:flutter/material.dart';
-import 'dart:math';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:jojo/components/theme.dart';
+import 'package:jojo/components/theme_provider.dart';
+import 'dart:math';
+import 'package:provider/provider.dart';
 // Project imports:
 import 'package:jojo/pages/favorites.dart';
 import 'package:jojo/pages/home.dart';
@@ -9,7 +13,10 @@ import 'package:jojo/pages/more.dart';
 
 // wichtig: flutter run -d web-server
 
-void main() => runApp(const MyApp());
+void main() => runApp(ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: const MyApp(),
+    ));
 
 int randomNumber = Random().nextInt(29) + 1;
 String number = (randomNumber > 9 ? randomNumber : "0$randomNumber").toString();
@@ -21,11 +28,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'JoJo Soundboard',
-      theme: ThemeData(
-        colorSchemeSeed: Colors.blue,
-        brightness: Brightness.dark, // !!!switch
-        useMaterial3: true,
-      ),
+      theme: Provider.of<ThemeProvider>(context).themeData,
+      themeMode: ThemeMode.system,
       home: const NavigationSite(),
     );
   }

@@ -10,7 +10,7 @@ class Home extends StatelessWidget {
       child: Column(
         children: [
           ColoredBox(
-            color: Colors.red,
+            color: Colors.deepOrange,
             child: SizedBox(
               width: 250,
               child: TextField(
