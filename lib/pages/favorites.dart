@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import "package:flutter/material.dart";
 
 import 'dart:io';
@@ -6,6 +8,7 @@ import 'dart:async';
 
 // Package imports:
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/services.dart';
 
 // Project imports:
 import "package:jojo/components/sound_button.dart";
@@ -18,27 +21,35 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  final List<String> sounds = [
+  List<String> sounds = [
     'soft and wet',
     'hey baby',
     'arigato Gyro',
     'Dojyaaan',
     'Mr Joestar',
     'oi Josuke',
-    'OraOra'
   ];
 
-  void getSounds() async {
-    var systemTempDir = Directory('assets/sounds');
-    await for (var entity
-        in systemTempDir.list(recursive: true, followLinks: false)) {
-      sounds.add(entity.path);
-    }
+  Future<void> _getSounds() async {
+    final manifestContent = await rootBundle.loadString('AssetManifest.json');
+
+    final Map<String, dynamic> manifestMap = json.decode(manifestContent);
+
+    final imagePaths = manifestMap.keys
+        .where((String key) => key.contains('sounds/'))
+        .where((String key) => key.contains('.mp3'))
+        .toList();
+
+    setState(() {
+      for (var i = 0; i < imagePaths.length; i++) {
+        imagePaths[i] = imagePaths[i].split("/")[2].replaceAll(".mp3", "");
+      }
+      sounds = imagePaths;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    getSounds();
     return Column(
       children: <Widget>[
         Wrap(
@@ -54,12 +65,12 @@ class _FavoritesState extends State<Favorites> {
           ],
         ),
         GestureDetector(
-          onTap: () {
-            getSounds();
-          },
-          child: Text("a"),
-        )
+            onTap: () {
+              _getSounds();
+            },
+            child: Text("ausführen")),
       ],
     );
   }
 }
+// hallo
