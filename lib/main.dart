@@ -12,6 +12,7 @@ import 'package:jojo/pages/home.dart';
 import 'package:jojo/pages/more.dart';
 
 // wichtig: flutter run -d web-server
+//          flutter build apk --release
 
 void main() => runApp(ChangeNotifierProvider(
       create: (context) => ThemeProvider(),

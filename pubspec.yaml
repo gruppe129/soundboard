@@ -63,7 +63,13 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/sounds/
+    - assets/sounds/0/
+    - assets/sounds/1/
+    - assets/sounds/2/
+    - assets/sounds/3/
+    - assets/sounds/4/
+    - assets/sounds/5/
+    - assets/sounds/6/
     - assets/images/jojo/
     - assets/images/logo.png
   # To add assets to your application, add an assets section, like this:
