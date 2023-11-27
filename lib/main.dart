@@ -84,7 +84,7 @@ class _NavigationSiteState extends State<NavigationSite> {
             icon: Icon(Icons.favorite_outline),
             label: 'Favorites',
             tooltip: '',
-            selectedIcon: Icon(Icons.favorite),
+            selectedIcon: Icon(Icons.favorite), 
           ),
           NavigationDestination(
             icon: Icon(Icons.more_horiz_outlined),
@@ -92,6 +92,7 @@ class _NavigationSiteState extends State<NavigationSite> {
             tooltip: '',
             selectedIcon: Icon(Icons.more_horiz),
           ),
+          
         ],
       ),
       body: <Widget>[const Home(), Favorites(), const More()][currentPageIndex],
