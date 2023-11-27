@@ -1,10 +1,9 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/services.dart';
-
 import 'package:share_plus/share_plus.dart';
 
 class SoundButton extends StatelessWidget {

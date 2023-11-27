@@ -1,6 +1,9 @@
 // Flutter imports:
 import "package:flutter/material.dart";
+
+// Package imports:
 import "package:url_launcher/url_launcher.dart";
+
 // about:
 
 class About extends StatelessWidget {
@@ -17,7 +20,7 @@ class About extends StatelessWidget {
           children: [
             const DrawerHeader(
               margin: EdgeInsets.only(top: 50),
-              child: Image(image: AssetImage('images/logo.png')),
+              child: Image(image: AssetImage('assets/images/logo.png')),
             ),
             ListTile(
               title: const Text("Version"),

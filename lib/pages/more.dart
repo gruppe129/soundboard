@@ -1,11 +1,13 @@
 // Flutter imports:
 import "package:flutter/material.dart";
-import 'package:jojo/components/theme.dart';
-import 'package:jojo/components/theme_provider.dart';
+
+// Package imports:
+import 'package:provider/provider.dart';
 
 // Project imports:
+import 'package:jojo/components/theme.dart';
+import 'package:jojo/components/theme_provider.dart';
 import 'package:jojo/pages/about.dart';
-import 'package:provider/provider.dart';
 
 class More extends StatefulWidget {
   const More({Key? key}) : super(key: key);
@@ -17,10 +19,7 @@ class More extends StatefulWidget {
 class _SettingsState extends State<More> {
   @override
   Widget build(BuildContext context) {
-    bool theme = Provider.of<ThemeProvider>(context).themeData == darkMode
-        ? true
-        : false;
-
+    final themeState = Provider.of<ThemeProvider>(context);
     return Scaffold(
       body: Center(
         child: ListView(
@@ -28,7 +27,7 @@ class _SettingsState extends State<More> {
           children: [
             const DrawerHeader(
               margin: EdgeInsets.only(top: 50, bottom: 10),
-              child: Image(image: AssetImage('images/logo.png')),
+              child: Image(image: AssetImage('assets/images/logo.png')),
             ),
             ListTile(
               title: const Text('General'),
@@ -36,14 +35,14 @@ class _SettingsState extends State<More> {
               onTap: () {},
             ),
             SwitchListTile(
-                value: theme,
+                value: themeState.getDarkTheme,
                 title: const Text('Switch Theme'),
-                secondary: Icon(theme ? Icons.light_mode : Icons.dark_mode),
-                onChanged: (bool value) {
+                secondary: Icon(themeState.getDarkTheme
+                    ? Icons.light_mode
+                    : Icons.dark_mode),
+                onChanged: (bool val) {
                   setState(() {
-                    theme = value;
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .toggleTheme();
+                    themeState.setDarkTheme = val;
                   });
                 }),
             ListTile(

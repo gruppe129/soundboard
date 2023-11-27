@@ -1,13 +1,9 @@
-// Flutter imports:
+// Dart imports:
+import 'dart:async';
 import 'dart:convert';
 
+// Flutter imports:
 import "package:flutter/material.dart";
-
-import 'dart:io';
-import 'dart:async';
-
-// Package imports:
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/services.dart';
 
 // Project imports:
@@ -21,12 +17,8 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
-  List<String> sounds = [
-    'dfgsdaf',
-    'lksdjhfgdf',
-    'dpoifug',
-  ];
-
+  List<String> sounds = [];
+  bool loaded = false;
 
   Future<void> _getSounds() async {
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
@@ -41,66 +33,46 @@ class _FavoritesState extends State<Favorites> {
     setState(() {
       for (var i = 0; i < imagePaths.length; i++) {
         //imagePaths[i] = imagePaths[i].split("/")[2].replaceAll(".mp3", "");
-        
+
         // $ordnerzahl/$name
-        imagePaths[i] = "${imagePaths[i].split("/")[2]}/${imagePaths[i].split("/")[3].replaceAll(".mp3", "")}";
+        imagePaths[i] =
+            "${imagePaths[i].split("/")[2]}/${imagePaths[i].split("/")[3].replaceAll(".mp3", "")}";
       }
 
       sounds = imagePaths;
+      loaded = true;
     });
   }
 
   @override
+  void initState() {
+    super.initState();
+    _getSounds();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    
-    return FractionallySizedBox(
-      child: SingleChildScrollView(
-        child: Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: [
-            ...sounds.map(
-              (sound) => SoundButton(
-                text: sound.substring(2).toUpperCase(),   // string ab 2. zeichen, split geht nicht und ich finde keine bessere lösung
-                path: "sounds/$sound.mp3",
+    return loaded == true
+        ? FractionallySizedBox(
+            child: SingleChildScrollView(
+              child: Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  ...sounds.map(
+                    (sound) => SoundButton(
+                      text: sound
+                          .toString()
+                          .split("/")[1]
+                          .toUpperCase(), // string ab 2. zeichen, split geht nicht und ich finde keine bessere lösung
+                      path: "sounds/$sound.mp3",
+                    ),
+                  ),
+                ],
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                _getSounds();
-              },
-              child: Text("ausführen")),
-          ],
-        ),
-      ),
-    );
+          )
+        : Text("loading");
   }
 }
-// hallo
-
-/*
-
-return Column(
-      children: <Widget>[
-        Wrap(
-          spacing: 10,
-          runSpacing: 10,
-          children: [
-            ...sounds.map(
-              (sound) => SoundButton(
-                text: sound.toUpperCase(),
-                path: "sounds/0/$sound.mp3",  // 0,1,... müssen automatisch kommen ↑
-              ),
-            )
-          ],
-        ),
-        GestureDetector(
-            onTap: () {
-              _getSounds();
-            },
-            child: Text("ausführen")),
-      ],
-    );
-
-
-*/
