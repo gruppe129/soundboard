@@ -122,7 +122,7 @@ class _NavigationSiteState extends State<NavigationSite> {
           ),
         ],
       ),
-      body: <Widget>[const Home(), Favorites(), const More()][currentPageIndex],
+      body: <Widget>[Home(), Favorites(), const More()][currentPageIndex],
     );
   }
 }

@@ -48,6 +48,15 @@ class SoundButton extends StatelessWidget {
     return FilledButton(
       onPressed: onClick,
       onLongPress: onLongPress,
+
+      style: FilledButton.styleFrom(
+        padding: const EdgeInsets.only(top: 20, bottom: 20),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        side: const BorderSide(color: Colors.white, width: 1),
+      ),
+
       child: Text(
         text,
         textAlign: TextAlign.center,

@@ -53,6 +53,61 @@ class _FavoritesState extends State<Favorites> {
   @override
   Widget build(BuildContext context) {
     return loaded == true
+        ? Scaffold(
+          body: ListView.separated(
+            
+            separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 10);
+            },
+            
+            padding: const EdgeInsets.all(10),
+            itemCount: sounds.length,
+            itemBuilder: (context, index) {
+              return SoundButton(
+                text: sounds[index].split("/")[1].toUpperCase(),
+                path: "sounds/${sounds[index]}.mp3",
+              );
+            },
+          )
+        )
+        : Text("loading");
+  }
+}
+
+
+
+
+
+/*
+
+  @override
+  Widget build(BuildContext context) {
+    return loaded == true
+        ? Scaffold(
+          body: ListView.separated(
+            
+            separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(height: 10);
+            },
+
+            padding: const EdgeInsets.all(10),
+            itemCount: sounds.length,
+            itemBuilder: (context, index) {
+              return SoundButton(
+                text: sounds[index].split("/")[1].toUpperCase(),
+                path: "sounds/${sounds[index]}.mp3",
+              );
+            },
+          )
+        )
+        : Text("loading");
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return loaded == true
         ? FractionallySizedBox(
             child: SingleChildScrollView(
               child: Wrap(
@@ -75,4 +130,6 @@ class _FavoritesState extends State<Favorites> {
           )
         : Text("loading");
   }
-}
+
+
+*/
