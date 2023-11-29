@@ -54,23 +54,58 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
     return loaded == true
         ? Scaffold(
-          body: ListView.separated(
+          body: Stack(
             
-            separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 10);
-            },
-            
-            padding: const EdgeInsets.all(10),
-            itemCount: sounds.length,
-            itemBuilder: (context, index) {
-              return SoundButton(
-                text: sounds[index].split("/")[1].toUpperCase(),
-                path: "sounds/${sounds[index]}.mp3",
-              );
-            },
+            children: [
+
+              Container(    // soundbuttons
+                margin: const EdgeInsets.only(top: 70),   
+                  // besser: textfield als listtile + itembuilder im gleichen listview
+                  //         anstatt nut im gleichen stack
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 10);
+                  },
+                  
+                  padding: const EdgeInsets.all(10),
+                  itemCount: sounds.length,
+                  itemBuilder: (context, index) {
+                    return SoundButton(
+                      text: sounds[index].split("/")[1].toUpperCase(),
+                      path: "sounds/${sounds[index]}.mp3",
+                    );
+                  },
+                ),
+              ),
+
+              Container(
+                padding: const EdgeInsets.all(10),
+                child: TextField(    // searchbar    
+                // man sieht das geschriebene nicht 
+                  controller: TextEditingController(),
+                  decoration: InputDecoration(
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: 'Search',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onChanged: (String query) {
+                    final suggestions = sounds.where((inhalt) {
+                      final inhaltLower = inhalt.toLowerCase();
+                      final queryLower = query.toLowerCase();
+                
+                      return inhaltLower.contains(queryLower);
+                    }).toList();
+                    setState(() => sounds = suggestions);
+                  },
+                ),
+              ),
+
+            ], 
           )
         )
-        : Text("loading");
+        : const Text("loading");
   }
 }
 
