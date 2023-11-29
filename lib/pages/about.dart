@@ -43,10 +43,3 @@ class About extends StatelessWidget {
     );
   }
 }
-
-/* 
-            // github öffnen
-            const Text("Version: 1.0.0")
-          ], // Children
-        ),
-*/

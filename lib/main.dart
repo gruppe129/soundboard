@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
             title: 'JoJo Soundboard',
             theme: themeProvider.getDarkTheme == true ? darkMode : lightMode,
             home: const NavigationSite(),
+            debugShowCheckedModeBanner: !!!true,
           );
         },
       ),
@@ -78,6 +79,7 @@ class _NavigationSiteState extends State<NavigationSite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      /*
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -93,7 +95,7 @@ class _NavigationSiteState extends State<NavigationSite> {
             ),
           ],
         ),
-      ),
+      ),*/
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {

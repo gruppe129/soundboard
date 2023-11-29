@@ -10,21 +10,19 @@ import 'package:flutter/services.dart';
 import "package:jojo/components/sound_button.dart";
 
 class Favorites extends StatefulWidget {
-  Favorites({Key? key}) : super(key: key);
+  const Favorites({Key? key}) : super(key: key);
 
   @override
   State<Favorites> createState() => _FavoritesState();
 }
 
 class _FavoritesState extends State<Favorites> {
-  List<String> sounds = [];
+  List<String> allSounds = [], shownSounds = [];
   bool loaded = false;
 
   Future<void> _getSounds() async {
     final manifestContent = await rootBundle.loadString('AssetManifest.json');
-
     final Map<String, dynamic> manifestMap = json.decode(manifestContent);
-
     final imagePaths = manifestMap.keys
         .where((String key) => key.contains('sounds/'))
         .where((String key) => key.contains('.mp3'))
@@ -39,7 +37,8 @@ class _FavoritesState extends State<Favorites> {
             "${imagePaths[i].split("/")[2]}/${imagePaths[i].split("/")[3].replaceAll(".mp3", "")}";
       }
 
-      sounds = imagePaths;
+      allSounds = imagePaths;
+      shownSounds = allSounds;
       loaded = true;
     });
   }
@@ -54,35 +53,30 @@ class _FavoritesState extends State<Favorites> {
   Widget build(BuildContext context) {
     return loaded == true
         ? Scaffold(
-          body: Stack(
-            
+            body: Stack(
             children: [
-
-              Container(    // soundbuttons
-                margin: const EdgeInsets.only(top: 70),   
-                  // besser: textfield als listtile + itembuilder im gleichen listview
-                  //         anstatt nut im gleichen stack
+              Container(
+                // soundbuttons
+                margin: const EdgeInsets.only(top: 70),
+                // besser: textfield als listtile + itembuilder im gleichen listview
+                //         anstatt nut im gleichen stack
                 child: ListView.separated(
                   separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: 10);
+                    return const SizedBox(height: 10);
                   },
-                  
                   padding: const EdgeInsets.all(10),
-                  itemCount: sounds.length,
+                  itemCount: shownSounds.length,
                   itemBuilder: (context, index) {
                     return SoundButton(
-                      text: sounds[index].split("/")[1].toUpperCase(),
-                      path: "sounds/${sounds[index]}.mp3",
+                      text: shownSounds[index].split("/")[1].toUpperCase(),
+                      path: "sounds/${shownSounds[index]}.mp3",
                     );
                   },
                 ),
               ),
-
               Container(
                 padding: const EdgeInsets.all(10),
-                child: TextField(    // searchbar    
-                // man sieht das geschriebene nicht 
-                  controller: TextEditingController(),
+                child: TextField(
                   decoration: InputDecoration(
                     prefixIcon: const Icon(Icons.search),
                     hintText: 'Search',
@@ -91,27 +85,21 @@ class _FavoritesState extends State<Favorites> {
                     ),
                   ),
                   onChanged: (String query) {
-                    final suggestions = sounds.where((inhalt) {
-                      final inhaltLower = inhalt.toLowerCase();
-                      final queryLower = query.toLowerCase();
-                
-                      return inhaltLower.contains(queryLower);
-                    }).toList();
-                    setState(() => sounds = suggestions);
+                    final suggestions = allSounds
+                        .where((inhalt) =>
+                            inhalt.toLowerCase().contains(query.toLowerCase()))
+                        .toList();
+                    setState(() {
+                      shownSounds = suggestions;
+                    });
                   },
                 ),
               ),
-
-            ], 
-          )
-        )
+            ],
+          ))
         : const Text("loading");
   }
 }
-
-
-
-
 
 /*
 

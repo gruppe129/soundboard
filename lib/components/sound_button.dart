@@ -45,23 +45,45 @@ class SoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
+    return ElevatedButton(
       onPressed: onClick,
       onLongPress: onLongPress,
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(4)),
+        ),
+        //side: const BorderSide(color: Colors.white, width: 1),
+      ),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(fontSize: 12), // color: Colors.white, 
+      ),
+    );
+  }
+}
 
+
+
+/*
+
+return FilledButton(
+      onPressed: onClick,
+      onLongPress: onLongPress,
       style: FilledButton.styleFrom(
-        padding: const EdgeInsets.only(top: 20, bottom: 20),
+        padding: const EdgeInsets.only(top: 10, bottom: 10),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
         side: const BorderSide(color: Colors.white, width: 1),
       ),
-
       child: Text(
         text,
         textAlign: TextAlign.center,
         style: const TextStyle(color: Colors.white, fontSize: 15),
       ),
     );
-  }
-}
+
+
+*/
