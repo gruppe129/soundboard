@@ -24,7 +24,7 @@ class About extends StatelessWidget {
             ),
             ListTile(
               title: const Text("Version"),
-              subtitle: const Text("1.0.0"),
+              subtitle: const Text("1.3.1"),
               onTap: () {},
               leading: const Icon(Icons.adb),
             ),

@@ -1,6 +1,3 @@
-// Dart imports:
-import 'dart:io';
-import 'dart:math';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
@@ -17,11 +14,10 @@ import 'package:jojo/pages/more.dart';
 
 // wichtig: flutter run -d web-server
 //          flutter build apk --release
+//          flutter pub run flutter_launcher_icons
 
 void main() => runApp(const MyApp());
 
-int randomNumber = Random().nextInt(29) + 1;
-String number = (randomNumber > 9 ? randomNumber : "0$randomNumber").toString();
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -79,23 +75,6 @@ class _NavigationSiteState extends State<NavigationSite> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(left: 5, right: 10),
-              child: const Text('JoJo Soundboard'),
-            ),
-            Image.asset(
-              'assets/images/jojo/$number.png',
-              fit: BoxFit.contain,
-              height: 32,
-            ),
-          ],
-        ),
-      ),*/
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
           setState(() {
