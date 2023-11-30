@@ -51,6 +51,18 @@ class _FavoritesState extends State<Favorites> {
 
   @override
   Widget build(BuildContext context) {
+    return const Center(
+      child: Text("favorites gibts noch nicht"),
+    );
+  }
+}
+
+
+
+/*
+
+  @override
+  Widget build(BuildContext context) {
     return loaded == true
         ? Scaffold(
             body: Stack(
@@ -99,60 +111,5 @@ class _FavoritesState extends State<Favorites> {
           ))
         : const Text("loading");
   }
-}
-
-/*
-
-  @override
-  Widget build(BuildContext context) {
-    return loaded == true
-        ? Scaffold(
-          body: ListView.separated(
-            
-            separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 10);
-            },
-
-            padding: const EdgeInsets.all(10),
-            itemCount: sounds.length,
-            itemBuilder: (context, index) {
-              return SoundButton(
-                text: sounds[index].split("/")[1].toUpperCase(),
-                path: "sounds/${sounds[index]}.mp3",
-              );
-            },
-          )
-        )
-        : Text("loading");
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return loaded == true
-        ? FractionallySizedBox(
-            child: SingleChildScrollView(
-              child: Wrap(
-                alignment: WrapAlignment.spaceEvenly,
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  ...sounds.map(
-                    (sound) => SoundButton(
-                      text: sound
-                          .toString()
-                          .split("/")[1]
-                          .toUpperCase(), // string ab 2. zeichen, split geht nicht und ich finde keine bessere lösung
-                      path: "sounds/$sound.mp3",
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        : Text("loading");
-  }
-
 
 */

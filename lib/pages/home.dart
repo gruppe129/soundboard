@@ -75,19 +75,34 @@ class _HomeState extends State<Home> {
                     fit: BoxFit.contain,
                     height: 32,
                   ),
+
+                    Expanded(
+                      flex: 1,  // keine ahnung was flex bringt
+                      child: Container(
+                        // ich bin der hardcoden profi und das bleibt auch so
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          height: 36,
+                          margin: const EdgeInsets.only(left: 40, top: 4),
+                        // ich bin der hardcoden profi und das bleibt auch so
+                        child: SearchBar(
+                          elevation: MaterialStateProperty.all(1),
+                          leading: const Icon(Icons.search),
+                          hintText: "Search",
+                          onChanged: (String query) {
+                            final suggestions = allSounds
+                                .where((inhalt) =>
+                                    inhalt.toLowerCase().contains(query.toLowerCase()))
+                                .toList();
+                            setState(() {
+                              shownSounds = suggestions;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  
                 ],
               ),
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                    showSearch(
-                      context: context,
-                      delegate: SearchBarDelegate(),
-                    );
-                  },
-                ),
-              ],
             ),
             body: GridView.builder(
               padding:
@@ -113,55 +128,6 @@ class _HomeState extends State<Home> {
 }
 
 
-class SearchBarDelegate extends SearchDelegate{
-    @override
-    Widget? buildLeading(BuildContext context) {
-      return IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          close(context, null);
-        },
-      );
-    }
-
-    @override
-    List<Widget>? buildActions(BuildContext context) {
-      return [
-        IconButton(
-          icon: const Icon(Icons.clear),
-          onPressed: () {
-            query = "";
-          },
-        ),
-      ];
-    }
-
-    @override
-    Widget buildResults(BuildContext context) {
-      return Container();
-    }
-
-    @override
-    Widget buildSuggestions(BuildContext context) {
-      final suggestions = allSounds
-          .where((inhalt) => inhalt
-              .toLowerCase()
-              .contains(query.toLowerCase()))
-          .toList();
-      return ListView.builder(
-        itemCount: suggestions.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(suggestions[index].toUpperCase()),
-            onTap: () {
-              query = suggestions[index];
-              showResults(context);
-            },
-          );
-        },
-      );
-    } 
-  }
 
 /* 
 Container(
