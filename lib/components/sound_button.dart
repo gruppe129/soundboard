@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:audioplayers/audioplayers.dart';
-import 'package:share_plus/share_plus.dart';
+import 'package:jojo/pages/favorites.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:esys_flutter_share_plus/esys_flutter_share_plus.dart';
 
 class SoundButton extends StatelessWidget {
   final String text;
@@ -24,21 +26,10 @@ class SoundButton extends StatelessWidget {
     }
   }
 
-  void onLongPress() {
-    print(
-        path); /*
-    final audio = await rootBundle.load("assets/$path");
-    final buffer = audio.buffer;
-    Share.shareXFiles([
-      XFile.fromData(
-          buffer.asUint8List(
-          audio.offsetInBytes, 
-          audio.lengthInBytes),
-          name: path,
-          mimeType: "audio/mpeg")
-    ]);*/
-    XFile audioFile = XFile("assets/$path");
-    Share.shareXFiles([audioFile]);
+  Future<void> onLongPress() async {
+    final ByteData bytes = await rootBundle.load('assets/$path');
+      await Share.file('sound', '${text.toLowerCase()}.mp3',
+          bytes.buffer.asUint8List(), 'audio/*');
   }
 
   SoundButton({required this.text, required this.path, super.key});
@@ -47,43 +38,18 @@ class SoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onClick,
-      onLongPress: onLongPress,
+      //onLongPress: onLongPress,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(4)),
         ),
-        //side: const BorderSide(color: Colors.white, width: 1),
       ),
       child: Text(
         text,
         textAlign: TextAlign.center,
-        style: const TextStyle(fontSize: 12), // color: Colors.white, 
+        style: const TextStyle(fontSize: 12), // color: Colors.white,
       ),
     );
   }
 }
-
-
-
-/*
-
-return FilledButton(
-      onPressed: onClick,
-      onLongPress: onLongPress,
-      style: FilledButton.styleFrom(
-        padding: const EdgeInsets.only(top: 10, bottom: 10),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4)),
-        ),
-        side: const BorderSide(color: Colors.white, width: 1),
-      ),
-      child: Text(
-        text,
-        textAlign: TextAlign.center,
-        style: const TextStyle(color: Colors.white, fontSize: 15),
-      ),
-    );
-
-
-*/

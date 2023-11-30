@@ -5,6 +5,6 @@ Soundboard
 https://docs.flutter.dev/ui/widgets/basics
 
 
-## ideen
+## ideas
 
-main aufräumen
+* notification when a sound is added/deleted to/from favorites

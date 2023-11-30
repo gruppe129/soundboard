@@ -11,7 +11,7 @@ dependencies:
   url_launcher: ^6.2.1
   flutter_native_splash: ^2.3.6
   audioplayers: ^5.2.1
-  share_plus: ^7.2.1
+  esys_flutter_share_plus: ^2.2.0
   provider: ^6.1.1
   shared_preferences: ^2.2.2
 
