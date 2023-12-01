@@ -28,8 +28,8 @@ class SoundButton extends StatelessWidget {
 
   Future<void> onLongPress() async {
     final ByteData bytes = await rootBundle.load('assets/$path');
-      await Share.file('sound', '${text.toLowerCase()}.mp3',
-          bytes.buffer.asUint8List(), 'audio/*');
+    await Share.file('sound', '${text.toLowerCase()}.mp3',
+        bytes.buffer.asUint8List(), 'audio/*');
   }
 
   SoundButton({required this.text, required this.path, super.key});
@@ -38,7 +38,7 @@ class SoundButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onClick,
-      //onLongPress: onLongPress,
+      onLongPress: onLongPress,
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.only(top: 10, bottom: 10),
         shape: const RoundedRectangleBorder(
