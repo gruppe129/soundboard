@@ -6,7 +6,7 @@
         </intent>
     </queries>
     <application
-        android:label="jojo"
+        android:label="JoJo Soundboard"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

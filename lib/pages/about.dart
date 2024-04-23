@@ -24,14 +24,14 @@ class About extends StatelessWidget {
             ),
             ListTile(
               title: const Text("Version"),
-              subtitle: const Text("1.3.1"),
+              subtitle: const Text("1.0.0"),
               onTap: () {},
               leading: const Icon(Icons.adb),
             ),
             ListTile(
               onTap: () {
                 launchUrl(
-                  Uri.parse("https://github.com/kommindiegruppe/soundboard"),
+                  Uri.parse("https://github.com/gruppe129/soundboard"),
                 );
               },
               leading: const Icon(Icons.code),

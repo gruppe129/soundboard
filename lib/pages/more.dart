@@ -29,11 +29,6 @@ class _SettingsState extends State<More> {
               margin: EdgeInsets.only(top: 50, bottom: 10),
               child: Image(image: AssetImage('assets/images/logo.png')),
             ),
-            ListTile(
-              title: const Text('General'),
-              leading: const Icon(Icons.tune),
-              onTap: () {},
-            ),
             SwitchListTile(
                 value: themeState.getDarkTheme,
                 title: const Text('Switch Theme'),

@@ -105,7 +105,7 @@ class _FavoritesState extends State<Favorites> {
             margin: const EdgeInsets.only(left: 30, right: 30),
             child: const Center(
               child: Text(
-                "Double tap on a sound to add it to favorites. Double tap on an added sound again to remove it. ",
+                "Double tap on a sound to add it to favorites. Double tap on an added sound to remove it. ",
                 textAlign: TextAlign.center,
               ),
             ),
