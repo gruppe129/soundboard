@@ -33,15 +33,16 @@ flutter:
     - assets/sounds/5/
     - assets/sounds/6/
     - assets/images/jojo/
+    - assets/images/applogo.png
     - assets/images/logo.png
 
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/images/app_logo.png"
+  image_path: "assets/images/applogo.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   web:
     generate: true
-    image_path: "assets/images/app_logo.png"
+    image_path: "assets/images/applogo.png"
     background_color: "#ffffff"
     theme_color: "#ffffff"
